@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "ffi", ">= 1.0.7"
 
-#  s.add_development_dependency "rspec",   "~> 2.4.0"
+  s.add_development_dependency "rspec",   "~> 2.5.0"
 
 #  s.files = `git ls-files`.split("\n")
   s.require_path = "lib"

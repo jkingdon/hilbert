@@ -11,7 +11,3 @@ module Hilbert
   attach_function :hilbert_module_makeimmutable, [ :pointer ], :int
 end
 
-proof = Hilbert.hilbert_module_create(:proof)
-puts "created proof with type #{Hilbert.hilbert_module_gettype(proof)}"
-Hilbert.hilbert_module_free(proof)
-
