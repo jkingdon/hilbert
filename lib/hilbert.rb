@@ -27,5 +27,18 @@ module Hilbert
   attach_function :hilbert_module_getobjects,
     [ :pointer, :pointer, :pointer ], :pointer
   attach_function :hilbert_array_free, [ :pointer ], :void
+
+  # This is an addition to FFI, but rather than monkey-patching,
+  # I'm putting it here for now. Should be forking FFI I suppose.
+  def self.get_size_t(memory_pointer, array_index)
+    size = memory_pointer.type_size
+    if size == 4
+      return memory_pointer.get_uint32(array_index)
+    elsif size == 8
+      return memory_pointer.get_uint64(array_index)
+    else
+      raise "Don't know how to get a size_t of #{size} bytes"
+    end
+  end
 end
 

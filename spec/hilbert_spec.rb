@@ -82,7 +82,7 @@ describe Hilbert do
   it "hilbert_module_import"
   it "hilbert_module_export"
 
-  it "an empty proof module has no objects" do
+  it "with an empty proof module has no objects" do
     proof = Hilbert.hilbert_module_create(:proof)
     FFI::MemoryPointer.new(:int, 1) do |errcodep|
       FFI::MemoryPointer.new(:size_t, 1) do |countp|
@@ -90,9 +90,7 @@ describe Hilbert do
           proof, countp, errcodep
         )
         errcodep.get_int(0).should == Hilbert::SUCCESS
-#        puts "type_size is #{countp.type_size.inspect}"
-#        puts (countp.methods - Object.methods).join("\n")
-#        countp.get_size_t(0).should == 0
+        Hilbert.get_size_t(countp, 0).should == 0
         Hilbert.hilbert_array_free(objects)
       end
     end
