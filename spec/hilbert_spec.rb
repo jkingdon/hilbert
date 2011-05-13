@@ -62,5 +62,40 @@ describe Hilbert do
       errcodep.get_int(0).should == Hilbert::SUCCESS
     end
   end
+
+  it "can set ancillary data" do
+    pending("this API is annoying from FFI; lots of memory allocation")
+    proof = Hilbert.hilbert_module_create(:proof)
+
+    FFI::MemoryPointer.new(:int, 1) do |ancillary|
+      Hilbert.hilbert_module_setancillary(proof, ancillary, 0).
+        should == 0
+      Hilbert.hilbert_module_getancillary(proof).should == ancillary
+    end
+  end
+
+  it "hilbert_kind_alias"
+  it "hilbert_kind_identify"
+  it "hilbert_kind_isequivalent"
+  it "hilbert_kind_equivalenceclass"
+  it "hilbert_module_param"
+  it "hilbert_module_import"
+  it "hilbert_module_export"
+
+  it "an empty proof module has no objects" do
+    proof = Hilbert.hilbert_module_create(:proof)
+    FFI::MemoryPointer.new(:int, 1) do |errcodep|
+      FFI::MemoryPointer.new(:size_t, 1) do |countp|
+        objects = Hilbert.hilbert_module_getobjects(
+          proof, countp, errcodep
+        )
+        errcodep.get_int(0).should == Hilbert::SUCCESS
+#        puts "type_size is #{countp.type_size.inspect}"
+#        puts (countp.methods - Object.methods).join("\n")
+#        countp.get_size_t(0).should == 0
+        Hilbert.hilbert_array_free(objects)
+      end
+    end
+  end
 end
 

@@ -24,5 +24,8 @@ module Hilbert
   attach_function :hilbert_module_makeimmutable, [ :pointer ], :int 
   attach_function :hilbert_module_isimmutable,
     [ :pointer, :pointer ], :int
+  attach_function :hilbert_module_getobjects,
+    [ :pointer, :pointer, :pointer ], :pointer
+  attach_function :hilbert_array_free, [ :pointer ], :void
 end
 
