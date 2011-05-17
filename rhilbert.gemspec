@@ -13,6 +13,6 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency "rspec",   "~> 2.5.0"
 
-#  s.files = `git ls-files`.split("\n")
+  s.files = `git ls-files`.split("\n")
   s.require_path = "lib"
 end

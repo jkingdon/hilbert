@@ -1,5 +1,5 @@
 require "bundler"
 Bundler.require :default, :development
 
-require "rhilbert/hilbert"
+require "rhilbert"
 
