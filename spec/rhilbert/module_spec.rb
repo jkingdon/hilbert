@@ -1,12 +1,37 @@
 require File.expand_path("#{File.dirname(__FILE__)}/../spec_helper")
 
 describe RHilbert::Module do
-  it "frees when it goes out of scope" do
-    pending("Still haven't figured out the ManagedStruct stuff")
-    begin
-      RHilbert::Module.new
+  it "can allocate a module with a block" do
+    RHilbert::Module.create do |m|
+      m.should_not be_nil
     end
+  end
+
+  it "frees the module when the block exits" do
     RHilbert::Hilbert.should_receive(:hilbert_module_free)
+    RHilbert::Module.create do |m|
+    end
+  end
+
+  it "blows up if we let the reference escape from the block" do
+    escaper = nil
+    RHilbert::Module.create do |m|
+      escaper = m
+    end
+    lambda { escaper.immutable? }.should raise_error(
+      "Attempt to access rhilbert module outside its block")
+  end
+
+  it "does not make it easy to leak/corrupt memory by calling new" do
+    lambda do
+      RHilbert::Module.new
+    end.should raise_error
+  end
+
+  it "is not immutable by default" do
+    RHilbert::Module.create do |m|
+      m.should_not be_immutable
+    end
   end
 
   it "can mark an interface as immutable"
