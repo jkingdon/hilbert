@@ -11,6 +11,15 @@ Rhilbert is a stab at another approach: rather than a prover, simply embed a con
 
 Another rationale is to make it easier to write tests for hilbert-kernel (which is the underlying proof engine for rhilbert). One can, of course, write unit tests in C (without any exception handling), but exception handling (and some of the other features of ruby and rspec) do make this easier.
 
+Usage
+-----
+
+require 'rhilbert'
+RHilbert::Module.interface do |m|
+  m.immutable?
+  m.make_immutable
+end
+
 Implementation
 --------------
 

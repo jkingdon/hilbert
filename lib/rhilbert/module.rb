@@ -72,7 +72,7 @@ module RHilbert
       is_immutable
     end
 
-    def set_immutable
+    def make_immutable
       errcode = RHilbert::Hilbert.hilbert_module_makeimmutable(hilbert_module)
       check_error(errcode,
         RHilbert::Hilbert::INVALID_MODULE =>

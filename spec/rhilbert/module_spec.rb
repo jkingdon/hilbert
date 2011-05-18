@@ -50,14 +50,14 @@ describe RHilbert::Module do
 
   it "can mark an interface as immutable" do
     RHilbert::Module.interface do |m|
-      m.set_immutable
+      m.make_immutable
       m.should be_immutable
     end
   end
 
   it "cannot mark a proof module as immutable" do
     RHilbert::Module.proof do |m|
-      lambda { m.set_immutable }.should raise_error(
+      lambda { m.make_immutable }.should raise_error(
         "Cannot mark a proof module as immutable"
       )
       m.should_not be_immutable
@@ -66,8 +66,8 @@ describe RHilbert::Module do
 
   it "get an error if the module is already immutable" do
     RHilbert::Module.interface do |m|
-      m.set_immutable
-      lambda { m.set_immutable }.should raise_error(
+      m.make_immutable
+      lambda { m.make_immutable }.should raise_error(
         "Module is already immutable"
       )
       m.should be_immutable
