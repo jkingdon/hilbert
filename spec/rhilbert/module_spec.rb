@@ -75,11 +75,11 @@ describe RHilbert::Module do
     end
   end
 
-  it "can tell me a mutable interface is not immutable"
-
-  it "can tell me an immutable module is immutable"
-
-  it "says that proof modules are not immutable"
+  it "says that proof modules are not immutable" do
+    RHilbert::Module.proof do |m|
+      m.should_not be_immutable
+    end
+  end
 
   it "with an empty proof module has no objects"
 end
