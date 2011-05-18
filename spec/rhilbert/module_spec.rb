@@ -35,17 +35,45 @@ describe RHilbert::Module do
     end
   end
 
-  it "is not immutable by default" do
+  it "proof module is a proof and not an interface module" do
     RHilbert::Module.proof do |m|
+      m.should_not be_interface
+      m.should be_proof
+    end
+  end
+
+  it "is not immutable by default" do
+    RHilbert::Module.interface do |m|
       m.should_not be_immutable
     end
   end
 
-  it "can mark an interface as immutable"
+  it "can mark an interface as immutable" do
+    RHilbert::Module.interface do |m|
+      m.set_immutable
+      m.should be_immutable
+    end
+  end
 
-  it "cannot mark a proof module as immutable"
+  it "cannot mark a proof module as immutable" do
+    RHilbert::Module.proof do |m|
+      lambda { m.set_immutable }.should raise_error(
+        "Cannot mark a proof module as immutable"
+      )
+      m.should_not be_immutable
+    end
+  end
 
-  it "get an error if the module is already immutable"
+  it "get an error if the module is already immutable" do
+    pending("will do this in the next commit")
+    RHilbert::Module.interface do |m|
+      m.set_immutable
+      lambda { m.set_immutable }.should raise_error(
+        "Module is already immutable"
+      )
+      m.should be_immutable
+    end
+  end
 
   it "can tell me a mutable interface is not immutable"
 
