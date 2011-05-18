@@ -65,7 +65,6 @@ describe RHilbert::Module do
   end
 
   it "get an error if the module is already immutable" do
-    pending("will do this in the next commit")
     RHilbert::Module.interface do |m|
       m.set_immutable
       lambda { m.set_immutable }.should raise_error(

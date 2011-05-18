@@ -74,8 +74,12 @@ module RHilbert
 
     def set_immutable
       errcode = RHilbert::Hilbert.hilbert_module_makeimmutable(hilbert_module)
-      check_error(errcode, RHilbert::Hilbert::INVALID_MODULE =>
-        "Cannot mark a proof module as immutable")
+      check_error(errcode,
+        RHilbert::Hilbert::INVALID_MODULE =>
+          "Cannot mark a proof module as immutable",
+        RHilbert::Hilbert::IMMUTABLE =>
+          "Module is already immutable"
+      )
     end
 
     def free
