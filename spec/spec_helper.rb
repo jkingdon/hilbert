@@ -1,5 +1,6 @@
 require "bundler"
 Bundler.require :default, :development
 
-require "rhilbert"
+require "hilbert"
 
+#Hilbert.backend :hilbert_kernel

@@ -1,10 +1,10 @@
 Gem::Specification.new do |s|
-  s.name        = "rhilbert"
+  s.name        = "hilbert"
   s.version     = "0.0.1"
   s.authors     = "Jim Kingdon"
   s.email       = "kingdon@panix.com"
-  s.homepage    = "http://github.com/jkingdon/rhilbert"
-  s.summary     = "Rhilbert theorem prover"
+  s.homepage    = "http://github.com/jkingdon/hilbert"
+  s.summary     = "Hilbert theorem prover"
   s.description = "Write mathematical proofs and script them in Ruby"
 
 #  s.rubyforge_project = s.name
