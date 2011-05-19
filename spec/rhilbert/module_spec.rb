@@ -80,6 +80,11 @@ describe RHilbert::Module do
     end
   end
 
-  it "with an empty proof module has no objects"
+  it "with an empty proof module has no objects" do
+    pending("not sure whether this is right, might want to be a block for memory freeing")
+    RHilbert::Module.proof do |m|
+      m.objects.should == []
+    end
+  end
 end
 
