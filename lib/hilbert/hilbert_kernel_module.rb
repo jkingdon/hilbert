@@ -1,5 +1,5 @@
-module RHilbert
-  class Module
+module Hilbert
+  class HilbertKernelModule
     def self.create(module_type, &block)
       mmodule = new(module_type)
       block.call(mmodule)
