@@ -1,8 +1,8 @@
 require 'rubygems'
 require 'ffi'
 
-module RHilbert
-  module Hilbert
+module Hilbert
+  module HilbertKernel
     extend FFI::Library
     ffi_lib '../hilbert-kernel/src/.libs/libhilbert.so'
     ModuleType = enum [:interface, :proof]

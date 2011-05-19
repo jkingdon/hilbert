@@ -1,3 +1,3 @@
-require "hilbert/hilbert"
+require "hilbert/hilbert_kernel"
 require "hilbert/module"
 

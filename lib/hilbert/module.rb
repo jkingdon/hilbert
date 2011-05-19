@@ -18,7 +18,7 @@ module RHilbert
 
     private
     def initialize(module_type)
-      @hilbert_module = Hilbert.hilbert_module_create(module_type)
+      @hilbert_module = Hilbert::HilbertKernel.hilbert_module_create(module_type)
     end
 
     def hilbert_module
@@ -30,28 +30,28 @@ module RHilbert
     end
 
     ERROR_MESSAGES = {
-      RHilbert::Hilbert::NOMEM => "Out of memory",
-      RHilbert::Hilbert::IMMUTABLE =>
+      Hilbert::HilbertKernel::NOMEM => "Out of memory",
+      Hilbert::HilbertKernel::IMMUTABLE =>
         "Must be immutable but isn't or vice versa",
-      RHilbert::Hilbert::INVALID_MODULE =>
+      Hilbert::HilbertKernel::INVALID_MODULE =>
         "Must be proof module but is interface module or vice versa",
-      RHilbert::Hilbert::INVALID_HANDLE =>
+      Hilbert::HilbertKernel::INVALID_HANDLE =>
         "Bad object handle or wrong object type",
-      RHilbert::Hilbert::COUNT_MISMATCH =>
+      Hilbert::HilbertKernel::COUNT_MISMATCH =>
         "Bad object count",
-      RHilbert::Hilbert::INVALID_MAPPING =>
+      Hilbert::HilbertKernel::INVALID_MAPPING =>
         "Error with object handle",
-      RHilbert::Hilbert::MAPPING_CLASH =>
+      Hilbert::HilbertKernel::MAPPING_CLASH =>
         "Map is not one to one",
-      RHilbert::Hilbert::NO_EQUIVALENCE =>
+      Hilbert::HilbertKernel::NO_EQUIVALENCE =>
         "Map does not respect kind equivalence classes",
-      RHilbert::Hilbert::INTERNAL =>
+      Hilbert::HilbertKernel::INTERNAL =>
         "Hilbert kernel internal error"
     }
 
     def check_error(errcode, overrides = {})
       messages = ERROR_MESSAGES.merge(overrides)
-      if errcode == RHilbert::Hilbert::SUCCESS
+      if errcode == Hilbert::HilbertKernel::SUCCESS
         true
       elsif messages[errcode]
         raise messages[errcode]
@@ -65,7 +65,7 @@ module RHilbert
       is_immutable = nil
       FFI::MemoryPointer.new(:int, 1) do |errcodep|
         is_immutable =
-          RHilbert::Hilbert.hilbert_module_isimmutable(
+          Hilbert::HilbertKernel.hilbert_module_isimmutable(
             hilbert_module, errcodep) != 0
         check_error(errcodep.get_int(0))
       end
@@ -73,27 +73,27 @@ module RHilbert
     end
 
     def make_immutable
-      errcode = RHilbert::Hilbert.hilbert_module_makeimmutable(hilbert_module)
+      errcode = Hilbert::HilbertKernel.hilbert_module_makeimmutable(hilbert_module)
       check_error(errcode,
-        RHilbert::Hilbert::INVALID_MODULE =>
+        Hilbert::HilbertKernel::INVALID_MODULE =>
           "Cannot mark a proof module as immutable",
-        RHilbert::Hilbert::IMMUTABLE =>
+        Hilbert::HilbertKernel::IMMUTABLE =>
           "Module is already immutable"
       )
     end
 
     def free
-      RHilbert::Hilbert.hilbert_module_free(@hilbert_module)
+      Hilbert::HilbertKernel.hilbert_module_free(@hilbert_module)
       @hilbert_module = nil
     end
 
     def interface?
-      RHilbert::Hilbert.
+      Hilbert::HilbertKernel.
         hilbert_module_gettype(@hilbert_module) == :interface
     end
 
     def proof?
-      RHilbert::Hilbert.
+      Hilbert::HilbertKernel.
         hilbert_module_gettype(@hilbert_module) == :proof
     end
   end

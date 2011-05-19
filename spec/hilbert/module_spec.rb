@@ -8,7 +8,7 @@ describe RHilbert::Module do
   end
 
   it "frees the module when the block exits" do
-    RHilbert::Hilbert.should_receive(:hilbert_module_free)
+    Hilbert::HilbertKernel.should_receive(:hilbert_module_free)
     RHilbert::Module.proof do |m|
     end
   end
