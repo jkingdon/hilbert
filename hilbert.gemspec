@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = "hilbert"
-  s.version     = "0.0.1"
+  s.version     = "0.0.2"
   s.authors     = "Jim Kingdon"
   s.email       = "kingdon@panix.com"
   s.homepage    = "http://github.com/jkingdon/hilbert"
@@ -9,9 +9,7 @@ Gem::Specification.new do |s|
 
 #  s.rubyforge_project = s.name
 
-  s.add_dependency "ffi", ">= 1.0.7"
-
-  s.add_development_dependency "rspec",   "~> 2.5.0"
+  s.add_development_dependency "rspec",   "~> 2.14.0"
 
   s.files = `git ls-files`.split("\n")
   s.require_path = "lib"
