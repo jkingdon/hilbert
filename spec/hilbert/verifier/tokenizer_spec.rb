@@ -9,5 +9,14 @@ describe "Tokenizer" do
     expect(tokenizer.next_token).to eq("foo")
     expect(tokenizer.next_token).to eq(nil)
   end
+
+  context "with a bunch of extraneous whitespace" do
+    let(:input) { "  \tfoo\n\n   \n" }
+
+    it "ignores all the whitespace" do
+      expect(tokenizer.next_token).to eq("foo")
+      expect(tokenizer.next_token).to eq(nil)
+    end
+  end
 end
 

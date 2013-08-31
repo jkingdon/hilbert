@@ -8,7 +8,7 @@ class Tokenizer
     if @stream.eof? && result == ""
       nil
     else
-      result
+      result.strip
     end
   end
 
