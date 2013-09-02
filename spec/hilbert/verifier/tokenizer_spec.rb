@@ -22,7 +22,6 @@ describe "Tokenizer" do
   context "with two tokens" do
     let(:input) { "foo bar" }
     it "returns them" do
-      pending("let's work on lines and come back to this")
       expect(tokenizer.next_token).to eq("foo")
       expect(tokenizer.next_token).to eq("bar")
       expect(tokenizer.next_token).to eq(nil)

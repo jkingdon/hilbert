@@ -65,7 +65,7 @@ class Tokenizer
       line, column, character = @stream.read_character
       case character
         when ' ', "\t", "\n"
-          # do nothing
+          return if @token
         when nil
           @token ||= EndOfFile.new(line, column)
           return
