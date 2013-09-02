@@ -27,7 +27,17 @@ describe "Tokenizer" do
       expect(tokenizer.next_token).to eq(nil)
     end
 
-    it "gives line/column numbers for each"
+    it "gives line/column numbers for each" do
+      expect(tokenizer.next_token).to eq("foo")
+      expect(tokenizer.current_line).to eq(1)
+      expect(tokenizer.current_column_start).to eq(1)
+      expect(tokenizer.current_column_end).to eq(4)
+
+      expect(tokenizer.next_token).to eq("bar")
+      expect(tokenizer.current_line).to eq(1)
+      expect(tokenizer.current_column_start).to eq(5)
+      expect(tokenizer.current_column_end).to eq(8)
+    end
   end
 
   context "with a parenthesized expression"
