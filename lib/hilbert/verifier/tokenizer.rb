@@ -35,33 +35,44 @@ class EndOfFile
   end
 end
 
-class Tokenizer
+class LineAndColumnCountingStream
   def initialize(stream)
     @stream = stream
     @line = 1
     @column = 1
+  end
+
+  def read_character
+    if @stream.eof?
+      [@line, @column, nil]
+    else
+      character = @stream.readchar
+      column = @column
+      @column += 1
+      [@line, column, character]
+    end
+  end
+end
+
+class Tokenizer
+  def initialize(stream)
+    @stream = LineAndColumnCountingStream.new(stream)
     @token = nil
   end
 
   def read
     while true
-      if @stream.eof?
-        # TODO: why this and the nil case both?
-        @token ||= EndOfFile.new(@line, @column)
-        return
-      end
-
-      character = @stream.readchar
+      line, column, character = @stream.read_character
       case character
         when ' ', "\t", "\n"
           # do nothing
         when nil
-          @token ||= EndOfFile.new(@line, @column)
+          @token ||= EndOfFile.new(line, column)
+          return
         else
-          @token ||= Token.new(@line, @column)
+          @token ||= Token.new(line, column)
           @token.add_character(character)
       end
-      @column += 1
     end
   end
 
