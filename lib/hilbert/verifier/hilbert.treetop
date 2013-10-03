@@ -1,0 +1,17 @@
+grammar Hilbert
+  rule top
+    token* <Top>
+  end
+
+  rule token
+    word / whitespace
+  end
+
+  rule word
+    [^ \t\n]+
+  end
+
+  rule whitespace
+    [ \t\n]+
+  end
+end

@@ -1,2 +1,2 @@
-require_relative 'hilbert/verifier/tokenizer'
+require_relative 'hilbert/verifier/parser'
 

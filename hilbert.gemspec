@@ -9,6 +9,8 @@ Gem::Specification.new do |s|
 
 #  s.rubyforge_project = s.name
 
+  s.add_dependency 'treetop'
+
   s.add_development_dependency "rspec",   "~> 2.14.0"
 
   s.files = `git ls-files`.split("\n")
