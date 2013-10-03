@@ -40,7 +40,16 @@ describe "Tokenizer" do
     end
   end
 
-  context "with a parenthesized expression"
+  context "with a parenthesized expression" do
+    let(:input) { "(foo)" }
+    it "treats parens as their own tokens, without needing whitespace" do
+      pending("not yet implemented")
+      expect(tokenizer.next_token).to eq("(")
+      expect(tokenizer.next_token).to eq("foo")
+      expect(tokenizer.next_token).to eq(")")
+      expect(tokenizer.next_token).to eq(nil)
+    end
+  end
 
   context "with some leading and trailing whitespace" do
     let(:input) { "  pi  " }
